@@ -53,9 +53,19 @@ function copyToClipboard(text) {
     tempInput.select();
     try {
         document.execCommand('copy');
-        alert('Text copied to clipboard!');
+        Swal.fire({
+            icon: 'success',
+            title: 'Copied!',
+            text: 'Text has been copied to clipboard',
+            timer: 1500,
+            showConfirmButton: false
+        });
     } catch (err) {
-        alert('Failed to copy text.');
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Failed to copy text to clipboard'
+        });
     }
     document.body.removeChild(tempInput);
 }
@@ -116,6 +126,17 @@ function isNumber(char) {
 // Function to encrypt the input message
 function encrypt() {
     const message = document.getElementById('message').value.toLowerCase();
+
+    // Check if textarea is empty
+    if (!message.trim()) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Empty Input',
+            text: 'Please enter a message to encrypt'
+        });
+        return;
+    }
+    
     encrypted = [];
     
     // Reset steps array
@@ -195,6 +216,16 @@ function encrypt() {
 // Function to decrypt the input message
 function decrypt() {
     const message = document.getElementById('message').value;
+    
+    if (!message.trim()) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Empty Input',
+            text: 'Please enter a valid encrypted message to decrypt'
+        });
+        return;
+    }
+
     let decrypted = '';
     
     // Reset steps array
