@@ -48,6 +48,17 @@ button:hover {
     background-color: #f9f9f9;
     word-wrap: break-word;
 }
+.copyclipboard{
+    background-color: #434443;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+    font-size: 1rem;
+    font-family: "Source Code Pro", serif;
+}
 
 @keyframes animate {
     0%{
