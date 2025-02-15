@@ -48,7 +48,8 @@ button:hover {
     background-color: #f9f9f9;
     word-wrap: break-word;
 }
-.copyclipboard{
+.copyclipboard,
+.downloadencrypted{
     background-color: #434443;
     color: white;
     padding: 5px 10px;

@@ -123,6 +123,25 @@ function isNumber(char) {
     return /[0-9]/.test(char);
 }
 
+function downloadAsFile(text, filename) {
+    const blob = new Blob([text], { type: 'text/plain' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    window.URL.revokeObjectURL(url);
+    document.body.removeChild(a);
+    Swal.fire({
+        icon: 'success',
+        title: 'Downloaded!',
+        text: 'Text has been downloaded as a file',
+        timer: 1500,
+        showConfirmButton: false
+    });
+}
+
 // Function to encrypt the input message
 function encrypt() {
     const message = document.getElementById('message').value.toLowerCase();
@@ -206,7 +225,10 @@ function encrypt() {
     document.getElementById('result').innerHTML = `
         <strong>Encrypted Message:</strong><br>
         ${encryptedMessage}
-        <button class="copyclipboard" onclick="copyToClipboard('${encryptedMessage}')">Copy Encrypted</button>
+        <div class="button-group">
+            <button class="copyclipboard" onclick="copyToClipboard('${encryptedMessage}')">Copy Encrypted</button>
+            <button class="downloadencrypted" onclick="downloadAsFile('${encryptedMessage}', 'encrypted_message.txt')">Download .txt</button>
+        </div>
     `;
     
     storeStep('=== FINAL ENCRYPTED MESSAGE ===', window.cryptoLogs.styles.header);
