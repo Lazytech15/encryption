@@ -1,4 +1,3 @@
-// index.js
 import express from 'express';
 import cors from 'cors';
 import rateLimit from 'express-rate-limit';
@@ -6,6 +5,9 @@ import serverless from 'serverless-http';
 
 const app = express();
 const router = express.Router();
+
+// Trust the proxy
+app.set('trust proxy', 1);
 
 // Rate limiting
 const limiter = rateLimit({
@@ -46,7 +48,6 @@ const isNumber = (char) => /[0-9]/.test(char);
 app.use(cors());
 app.use(express.json());
 app.use(limiter);
-app.set('trust proxy', 1);
 app.use('/.netlify/functions/index', router);
 
 // API Documentation route
