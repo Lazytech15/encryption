@@ -26,7 +26,7 @@
                 storeStep('5. For character pairs:', window.cryptoLogs.styles.guide);
                 storeStep('   - Format: [pos1×pos2]-[pos2]-[case1][case2]', window.cryptoLogs.styles.guide);
                 storeStep('   - Case flags: 1=uppercase, 0=lowercase', window.cryptoLogs.styles.guide);
-                storeStep('   - Example: "He" → "48-2-10" (24×2=48, e=2, H=upper, e=lower)', window.cryptoLogs.styles.guide);
+                storeStep('   - Example: "He" → "418-22-10" (19×22=418, e=22, H=upper, e=lower)', window.cryptoLogs.styles.guide);
                 storeStep('6. For single characters:', window.cryptoLogs.styles.guide);
                 storeStep('   - Format: [position]-[case]', window.cryptoLogs.styles.guide);
                 storeStep('   - Example: "A" → "26-1" (a=26, uppercase=1)', window.cryptoLogs.styles.guide);
