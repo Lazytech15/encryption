@@ -6,13 +6,42 @@ import serverless from 'serverless-http';
 const app = express();
 const router = express.Router();
 
-// Trust the proxy
-app.set('trust proxy', 1);
+// Trust the proxy - needed for accurate IP detection
+app.set('trust proxy', true);
 
 // Rate limiting
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100 // limit each IP to 100 requests per windowMs
+    max: 100, // limit each IP to 100 requests per windowMs
+    standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+    legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+    handler: (req, res) => {
+        res.status(429).json({
+            error: 'Too many requests, please try again later.',
+            retryAfter: Math.ceil(req.rateLimit.resetTime / 1000)
+        });
+    },
+    // Custom key generator for serverless environment
+    keyGenerator: (req) => {
+        // Try different headers that might contain the client IP
+        const ip = req.ip || 
+                  req.headers['x-forwarded-for'] || 
+                  req.headers['x-real-ip'] || 
+                  req.connection.remoteAddress || 
+                  'unknown';
+        
+        return Array.isArray(ip) ? ip[0] : ip;
+    },
+    // Skip if IP cannot be determined
+    skip: (req) => {
+        const hasValidIp = Boolean(
+            req.ip || 
+            req.headers['x-forwarded-for'] || 
+            req.headers['x-real-ip'] || 
+            req.connection.remoteAddress
+        );
+        return !hasValidIp;
+    }
 });
 
 // Symbol mapping (continuing after 26 for letters)
