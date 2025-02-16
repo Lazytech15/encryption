@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="assets/data-encryption.png" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Encryption/Decryption API Documentation</title>
+    <title>Numeric-Base API Documentation</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
     <style>
         :root {
@@ -178,7 +179,7 @@
 
         <div class="section">
             <h2>Base URL</h2>
-            <pre><code class="language-http">https://your-netlify-app.netlify.app/api</code></pre>
+            <pre><code class="language-http">https://numeric-base-api.netlify.app/.netlify/functions/index</code></pre>
         </div>
 
         <div class="section">
@@ -195,7 +196,7 @@
             <div class="endpoint">
                 <h3><span class="method get">GET</span> /</h3>
                 <p>Returns detailed API documentation and available endpoints.</p>
-                <pre><code class="language-javascript">fetch('https://your-netlify-app.netlify.app/api')
+                <pre><code class="language-javascript">fetch('https://numeric-base-api.netlify.app/.netlify/functions/index')
     .then(response => response.json())
     .then(data => console.log(data));</code></pre>
             </div>
@@ -283,7 +284,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
     <script>
-        const API_BASE_URL = 'https://your-netlify-app.netlify.app/api';
+        const API_BASE_URL = 'https://numeric-base-api.netlify.app/.netlify/functions/index';
 
         async function tryEncrypt() {
             const input = document.getElementById('encrypt-input').value;
