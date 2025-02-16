@@ -46,6 +46,7 @@ const isNumber = (char) => /[0-9]/.test(char);
 app.use(cors());
 app.use(express.json());
 app.use(limiter);
+app.set('trust proxy', 1);
 app.use('/.netlify/functions/index', router);
 
 // API Documentation route
