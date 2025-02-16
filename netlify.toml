@@ -4,5 +4,15 @@
 
 [[redirects]]
   from = "/api/*"
-  to = "/.netlify/functions/index/:splat"
+  to = "/.netlify/functions/:splat"
   status = 200
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; font-src 'self' data:;"
+
+[[headers]]
+  for = "/.netlify/functions/api/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; font-src 'self' data:;"
